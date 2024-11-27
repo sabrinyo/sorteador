@@ -52,29 +52,23 @@
 </div>
 
 <script>
-    const nomes = ['Vitoria', 'Julia', 'Sabrina', 'Willian', 'Luiz', 'Thierry'];
+    const nomes = ['Vitoria', 'Julia', 'Sabrina', 'Willian', 'Luiz', 'Thierry', 'Wallace', 'Caroline'];
 
-    // Verifica se já existe uma lista de nomes sorteados no localStorage
     let nomesDisponiveis = JSON.parse(localStorage.getItem('nomesDisponiveis')) || [...nomes]; 
 
-    // Função para sortear o nome
     function sortearNome() {
         if (nomesDisponiveis.length === 0) {
             document.getElementById('resultado').innerText = 'Todos os sorteios foram realizados!';
             return;
         }
 
-        // Sorteia um nome aleatório
         const indiceSorteado = Math.floor(Math.random() * nomesDisponiveis.length);
         const nomeSorteado = nomesDisponiveis[indiceSorteado];
 
-        // Exibe o resultado
         document.getElementById('resultado').innerText = `Seu amigo secreto é: ${nomeSorteado}`;
 
-        // Remove o nome sorteado da lista
         nomesDisponiveis = nomesDisponiveis.filter(nome => nome !== nomeSorteado);
 
-        // Salva a lista de nomes disponíveis no localStorage para o próximo acesso
         localStorage.setItem('nomesDisponiveis', JSON.stringify(nomesDisponiveis));
     }
 </script>
