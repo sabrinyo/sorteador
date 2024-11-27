@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteio de Amigo Secreto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Sorteio de Amigo Secreto</h1>
+    <button onclick="sortearNome()">Sortear Amigo Secreto</button>
+    <div class="result" id="resultado"></div>
+</div>
+
+<script>
+    const nomes = ['Vitoria', 'Julia', 'Sabrina', 'Willian', 'Luiz', 'Thierry'];
+
+    // Verifica se já existe uma lista de nomes sorteados no localStorage
+    let nomesDisponiveis = JSON.parse(localStorage.getItem('nomesDisponiveis')) || [...nomes]; 
+
+    // Função para sortear o nome
+    function sortearNome() {
+        if (nomesDisponiveis.length === 0) {
+            document.getElementById('resultado').innerText = 'Todos os sorteios foram realizados!';
+            return;
+        }
+
+        // Sorteia um nome aleatório
+        const indiceSorteado = Math.floor(Math.random() * nomesDisponiveis.length);
+        const nomeSorteado = nomesDisponiveis[indiceSorteado];
+
+        // Exibe o resultado
+        document.getElementById('resultado').innerText = `Seu amigo secreto é: ${nomeSorteado}`;
+
+        // Remove o nome sorteado da lista
+        nomesDisponiveis = nomesDisponiveis.filter(nome => nome !== nomeSorteado);
+
+        // Salva a lista de nomes disponíveis no localStorage para o próximo acesso
+        localStorage.setItem('nomesDisponiveis', JSON.stringify(nomesDisponiveis));
+    }
+</script>
+
+</body>
+</html>
